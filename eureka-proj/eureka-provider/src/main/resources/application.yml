@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: eureka-provider-01
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://slave1:8761/eureka/,http://slave2:8762/eureka/,http://slave3:8763/eureka/
+  instance:
+    preferIpAddress: true
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: Spring-Cloud-Eureka-Provider
+    version: 1.0.0
+    build.artifactId: $project.artifactId$
+    build.version: $project.version$
+
+---
+spring:
+  profiles:
+    slave1
+server:
+  port: 7761
+eureka:
+  instance:
+    hostname: slave1
+
+---
+spring:
+  profiles:
+    slave2
+server:
+  port: 7762
+eureka:
+  instance:
+    hostname: slave2
+
+---
+spring:
+  profiles:
+    slave3
+server:
+  port: 7763
+eureka:
+  instance:
+    hostname: slave3

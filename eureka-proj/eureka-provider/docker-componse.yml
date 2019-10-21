@@ -1,0 +1,36 @@
+version: '3.5'
+services:
+  slave1:
+    container_name: eureka-provider-01
+    image: learn/eureka-provider:1.0-SNAPSHOT
+    networks:
+      - learn-eureka-server-net
+    ports:
+      - 7761:7761
+    environment:
+      - SPRING_PROFILES_ACTIVE=slave1
+
+  slave2:
+    container_name: eureka-provider-02
+    image: learn/eureka-provider:1.0-SNAPSHOT
+    networks:
+      - learn-eureka-server-net
+    ports:
+      - 7762:7762
+    environment:
+      - SPRING_PROFILES_ACTIVE=slave2
+
+  slave3:
+    container_name: eureka-provider-03
+    image: learn/eureka-provider:1.0-SNAPSHOT
+    networks:
+      - learn-eureka-server-net
+    ports:
+      - 7763:7763
+    environment:
+      - SPRING_PROFILES_ACTIVE=slave3
+
+networks:
+  learn-eureka-server-net:
+    name: learn-eureka-server-net
+    driver: bridge

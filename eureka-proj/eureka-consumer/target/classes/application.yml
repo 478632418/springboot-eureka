@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: eureka-consumer-01
+eureka:
+  client:
+    service-url:
+      defaultZone: http://slave1:8761/eureka/,http://slave2:8762/eureka/,http://slave3:8763/eureka/
+  instance:
+    preferIpAddress: true
+info:
+  app:
+    name: ${spring.application.name}
+    description: Spring-Cloud-Eureka-Consumer
+    version: 1.0.0
+    build.artifactId: $project.artifactId$
+    build.version: $project.version$
+#取消Ribbon使用Eureka
+#ribbon:
+#   eureka:
+#      enabled: true
+#配置Ribbon能访问 的微服务节点，多个节点用逗号隔开
+#spring-cloud-consumer:
+#    ribbon:
+#       listOfServers: localhost:8001,localhost:8002
+
+---
+spring:
+  profiles: slave1
+server:
+  port: 6761
+management:
+  port: 54001
+  health:
+    mail:
+      enabled: false
+eureka:
+  instance:
+    hostname: slave1
